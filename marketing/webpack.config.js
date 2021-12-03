@@ -12,7 +12,7 @@ module.exports = {
   },
   target: 'webworker',
   output: {
-    // would be nice to be able to customize this
+    // would be nice to be able to customize this, throws if not named index
     /**
      * error: Invalid value for '<input>': No such file or directory (os error 2)
       ERROR: error during execution process:
