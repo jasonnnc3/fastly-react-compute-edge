@@ -19,14 +19,18 @@ module.exports = {
         type: 'asset/source',
       },
       {
-        test: /\.(js|jsx)$/,
-        use: ['babel-loader'],
+        test: /\.(ts|js)x?$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        options: {
+          cacheDirectory: true,
+        },
       },
     ],
   },
   resolve: {
     modules: [path.resolve(__dirname, '.'), 'node_modules'],
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
   plugins: [
     // Polyfills go here.
