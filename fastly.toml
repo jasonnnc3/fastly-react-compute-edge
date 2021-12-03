@@ -6,4 +6,4 @@ description = "A basic starter kit that demonstrates routing, simple synthetic r
 language = "javascript"
 manifest_version = 2
 name = "fastly-compute"
-service_id = ""
+service_id = "1oK339TNygw8QZMJDaAtal"
