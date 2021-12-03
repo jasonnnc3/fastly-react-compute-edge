@@ -13,7 +13,7 @@
   "author": "oss@fastly.com",
   "main": "src/index.js",
   "scripts": {
-    "prebuild": "webpack",
+    "prebuild": "tsc & webpack",
     "build": "js-compute-runtime --skip-pkg bin/index.js bin/main.wasm",
     "deploy": "npm run build && fastly compute deploy",
     "check-types": "tsc"
