@@ -1,4 +1,5 @@
 //! Default Compute@Edge template program.
+import ReactDOMServer from "react-dom/server";
 import welcomePage from "./welcome-to-compute@edge.html";
 
 // The entry point for your application.
@@ -24,7 +25,7 @@ async function handleRequest(event) {
   let url = new URL(req.url);
 
   // If request is to the `/` path...
-  if (url.pathname == "/") {
+  if (url.pathname === "/") {
     // Below are some common patterns for Compute@Edge services using JavaScript.
     // Head to https://developer.fastly.com/learning/compute/javascript/ to discover more.
 
@@ -55,10 +56,13 @@ async function handleRequest(event) {
     // logger.log("Hello from the edge!");
 
     // Send a default synthetic response.
-    return new Response(welcomePage, {
-      status: 200,
-      headers: new Headers({ "Content-Type": "text/html; charset=utf-8" }),
-    });
+    return new Response(
+      ReactDOMServer.renderToString(<div>rendered on the edge</div>),
+      {
+        status: 200,
+        headers: new Headers({ "Content-Type": "text/html; charset=utf-8" }),
+      }
+    );
   }
 
   // Catch all other requests and return a 404.
