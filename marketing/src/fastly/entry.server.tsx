@@ -3,6 +3,7 @@
 import 'regenerator-runtime/runtime.js';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
+// @ts-ignore
 import indexHtml from 'src/fastly/index.html';
 import { StaticRouter } from 'react-router-dom/server';
 import { App } from 'src/app';
@@ -11,6 +12,7 @@ fastly.enableDebugLogging(true);
 
 addEventListener('fetch', (event) => event.respondWith(handleRequest(event)));
 
+// @ts-ignore
 async function handleRequest({ request }) {
   if (!['HEAD', 'GET'].includes(request.method)) {
     return new Response('This method is not allowed', {

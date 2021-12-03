@@ -13,7 +13,7 @@
     "moduleResolution": "node",
     "baseUrl": ".",
     "skipLibCheck": true,
-    "allowJs": true,
+    "allowJs": false,
     "strict": false,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
