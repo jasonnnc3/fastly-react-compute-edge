@@ -34,5 +34,20 @@
   },
   "engines": {
     "node": "^16"
+  },
+  "devDependencies": {
+    "husky": "^7.0.4",
+    "lint-staged": "^12.1.2",
+    "prettier": "^2.5.0"
+  },
+    "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx,json,css,scss,md,mdx}": [
+      "prettier --write"
+    ]
   }
 }
