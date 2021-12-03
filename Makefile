@@ -14,7 +14,7 @@ web-build: npm
 	@$(EXIT_ON_ERROR) cd web && npm run prebuild
 	@$(EXIT_ON_ERROR) aws s3 sync ./web/bin/ s3://my-vite-webapp/
 
-web-dev: web-build
+dev: web-build
 	@$(EXIT_ON_ERROR) cd web && fastly compute serve
 
 web-deploy: web-build
