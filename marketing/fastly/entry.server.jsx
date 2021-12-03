@@ -1,9 +1,13 @@
+/// <reference types="@fastly/js-compute" />
+
 import 'regenerator-runtime/runtime.js';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import indexHtml from 'fastly/index.html';
 import { StaticRouter } from 'react-router-dom/server';
 import { App } from 'src/app';
+
+fastly.enableDebugLogging(true);
 
 addEventListener('fetch', (event) => event.respondWith(handleRequest(event)));
 

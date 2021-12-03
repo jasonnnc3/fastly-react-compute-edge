@@ -4,7 +4,7 @@ const webpack = require('webpack');
 module.exports = {
   mode: 'production',
   entry: {
-    index: './fastly/entry.server.js',
+    index: './fastly/entry.server.jsx',
     client: './fastly/entry.client.jsx',
   },
   optimization: {
