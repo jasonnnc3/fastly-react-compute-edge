@@ -11,6 +11,9 @@ export function App() {
           <>
             <div>not found</div>
             <Link to="/">to home</Link>
+            <div>
+              <a href="https://github.com/jasonnnnnnnnnnnnn/fastly-react-compute-edge">view code</a>
+            </div>
           </>
         }
       />
@@ -20,6 +23,9 @@ export function App() {
           <>
             <div>Home</div>
             <Link to="/about">to about</Link>
+            <div>
+              <a href="https://github.com/jasonnnnnnnnnnnnn/fastly-react-compute-edge">view code</a>
+            </div>
           </>
         }
       />
@@ -29,6 +35,9 @@ export function App() {
           <>
             <div>About</div>
             <Link to="/">to home</Link>
+            <div>
+              <a href="https://github.com/jasonnnnnnnnnnnnn/fastly-react-compute-edge">view code</a>
+            </div>
           </>
         }
       />
