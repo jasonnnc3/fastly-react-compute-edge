@@ -2,7 +2,7 @@
   "compilerOptions": {
     "outDir": "./dist/",
     "sourceMap": true,
-    "strictNullChecks": false,
+    "strictNullChecks": true,
     "module": "ESNext",
     "jsx": "react",
     "target": "ES5",
@@ -14,7 +14,7 @@
     "baseUrl": ".",
     "skipLibCheck": true,
     "allowJs": false,
-    "strict": false,
+    "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "resolveJsonModule": true,
