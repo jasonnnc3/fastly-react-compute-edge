@@ -3,13 +3,24 @@ const webpack = require('webpack');
 
 module.exports = {
   mode: 'production',
-  entry: './fastly/working.js',
+  entry: {
+    index: './fastly/entry.server.js',
+    client: './fastly/entry.client.jsx',
+  },
   optimization: {
     minimize: true,
   },
   target: 'webworker',
   output: {
-    filename: 'index.js',
+    // would be nice to be able to customize this
+    /**
+     * error: Invalid value for '<input>': No such file or directory (os error 2)
+      ERROR: error during execution process:
+     error: Invalid value for '<input>': No such file or directory (os error 2).
+
+      If you believe this error is the result of a bug, please file an issue: https://github.com/fastly/cli/issues/new?labels=bug&template=bug_report.md
+     */
+    filename: '[name].js',
     path: path.resolve(__dirname, 'bin'),
     libraryTarget: 'this',
   },
