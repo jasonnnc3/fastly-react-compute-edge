@@ -2,7 +2,10 @@ EXIT_ON_ERROR = set -e;
 
 #REVISION := $(shell git rev-parse HEAD)
 
-npm: npm-marketingapp
+npm: npm-marketin
 
-npm-marketingapp:
-	@$(EXIT_ON_ERROR) cd marketingapp && npm install
+npm-marketing:
+	@$(EXIT_ON_ERROR) cd marketing && npm install
+
+npm-web:
+	@$(EXIT_ON_ERROR) cd marketing && npm install
