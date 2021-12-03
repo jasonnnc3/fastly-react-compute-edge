@@ -2,20 +2,20 @@ EXIT_ON_ERROR = set -e;
 
 #REVISION := $(shell git rev-parse HEAD)
 
-npm: npm-marketing npm-web
-
-npm-marketing:
-	@$(EXIT_ON_ERROR) cd marketing && npm install
+npm: npm-web npm-api
 
 npm-web:
 	@$(EXIT_ON_ERROR) cd web && npm install
 
-marketing-build: npm
-	@$(EXIT_ON_ERROR) cd marketing && npm run prebuild
-	@$(EXIT_ON_ERROR) aws s3 sync ./marketing/bin/ s3://my-vite-webapp/
+npm-api:
+	@$(EXIT_ON_ERROR) cd api && npm install
 
-marketing-dev: marketing-build
-	@$(EXIT_ON_ERROR) cd marketing && fastly compute serve
+web-build: npm
+	@$(EXIT_ON_ERROR) cd web && npm run prebuild
+	@$(EXIT_ON_ERROR) aws s3 sync ./web/bin/ s3://my-vite-webapp/
 
-marketing-deploy: marketing-build
-	@$(EXIT_ON_ERROR) cd marketing && npm run deploy
+web-dev: web-build
+	@$(EXIT_ON_ERROR) cd web && fastly compute serve
+
+web-deploy: web-build
+	@$(EXIT_ON_ERROR) cd web && npm run deploy
