@@ -1,5 +1,7 @@
 import 'regenerator-runtime/runtime.js';
-import { reactString } from 'src/app';
+import React from 'react';
+import ReactDOMServer from 'react-dom/server';
+import { App } from 'src/app';
 
 addEventListener('fetch', (event) => event.respondWith(handleRequest(event)));
 
@@ -20,7 +22,7 @@ async function handleRequest({ request }) {
   }
 
   if (url.pathname === '/react') {
-    return new Response(reactString, {
+    return new Response(ReactDOMServer.renderToString(<App testProp="a prop" />), {
       status: 200,
       headers: new Headers({ 'Content-Type': 'text/html; charset=utf-8' }),
     });
