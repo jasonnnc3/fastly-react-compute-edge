@@ -7,3 +7,4 @@ language = "javascript"
 manifest_version = 2
 name = "fastly-compute"
 service_id = "1oK339TNygw8QZMJDaAtal"
+
