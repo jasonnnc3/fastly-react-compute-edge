@@ -3,7 +3,7 @@ import React from "react";
 import ReactDOMServer from "react-dom/server";
 
 const reactString = ReactDOMServer.renderToString(<div>test</div>);
-const htmlString = "<div>working test</div>";
+const htmlString = "<div>test</div>";
 
 addEventListener("fetch", (event) => event.respondWith(handleRequest(event)));
 
