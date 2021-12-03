@@ -1,11 +1,37 @@
-import 'regenerator-runtime/runtime.js';
 import React from 'react';
+import { Routes } from 'react-router';
+import { Link, Route } from 'react-router-dom';
 
-export function App(props) {
+export function App() {
   return (
-    <>
-      <div>these are some props</div>
-      <pre>{JSON.stringify(props, null, 2)}</pre>
-    </>
+    <Routes>
+      <Route
+        path="*"
+        element={
+          <>
+            <div>not found</div>
+            <Link to="/">to home</Link>
+          </>
+        }
+      />
+      <Route
+        path="/"
+        element={
+          <>
+            <div>Home</div>
+            <Link to="/about">to about</Link>
+          </>
+        }
+      />
+      <Route
+        path="/about"
+        element={
+          <>
+            <div>About</div>
+            <Link to="/">to home</Link>
+          </>
+        }
+      />
+    </Routes>
   );
 }
