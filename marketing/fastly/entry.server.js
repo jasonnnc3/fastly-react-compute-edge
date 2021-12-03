@@ -16,6 +16,13 @@ async function handleRequest({ request }) {
 
   const url = new URL(request.url);
 
+  if (url.pathname === '/client.js') {
+    return new Response("console.log('todo direct to s3 backend')", {
+      status: 200,
+      headers: new Headers({ 'Content-Type': 'application/json; charset=utf-8' }),
+    });
+  }
+
   const ssrHtml = ReactDOMServer.renderToString(
     <StaticRouter location={url}>
       <App />
