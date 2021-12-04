@@ -2,7 +2,7 @@
 # https://developer.fastly.com/reference/fastly-toml/
 
 authors = [""]
-description = "A basic starter kit that demonstrates routing, simple synthetic responses and overriding caching rules."
+description = "react + typescript + ssr + compute@edge"
 language = "javascript"
 manifest_version = 2
 name = "api"

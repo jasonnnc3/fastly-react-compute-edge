@@ -2,9 +2,14 @@
 # https://developer.fastly.com/reference/fastly-toml/
 
 authors = [""]
-description = "A basic starter kit that demonstrates routing, simple synthetic responses and overriding caching rules."
+description = "react + typescript + ssr + compute@edge"
 language = "javascript"
 manifest_version = 2
 name = "fastly-compute"
 service_id = "1oK339TNygw8QZMJDaAtal"
+
+[local_server]
+  [local_server.backends]
+    [local_server.backends.web_static_s3]
+      url = "https://my-vite-webapp.s3.us-west-2.amazonaws.com"
 
