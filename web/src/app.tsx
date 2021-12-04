@@ -10,7 +10,9 @@ export function App() {
         element={
           <>
             <div>not found</div>
-            <Link to="/">to home</Link>
+            <Link to="/" reloadDocument>
+              to home
+            </Link>
             <div>
               <a href="https://github.com/jasonnnnnnnnnnnnn/fastly-react-compute-edge">view code</a>
             </div>

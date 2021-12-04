@@ -23,6 +23,7 @@ async function handleRequest({ request }) {
   const url = new URL(request.url);
 
   // hardcoding in index.html until i figure out backends, i feel like theres a better way to do this, but it works for now
+  // TODO: cache header by revision
   if (url.pathname === '/client.js') {
     const res = await fetch('https://my-vite-webapp.s3.us-west-2.amazonaws.com/client.js', {
       method: 'GET',
