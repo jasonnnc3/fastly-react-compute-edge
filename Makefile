@@ -15,7 +15,7 @@ type-check: npm
 
 web-build: npm
 	@$(EXIT_ON_ERROR) cd web && npm run webpack
-	@$(EXIT_ON_ERROR) aws s3 sync ./web/bin/ s3://my-vite-webapp/
+	@$(EXIT_ON_ERROR) aws s3 sync ./web/dist/ s3://my-vite-webapp/
 
 dev: web-build type-check
 	@$(EXIT_ON_ERROR) cd web && fastly compute serve
