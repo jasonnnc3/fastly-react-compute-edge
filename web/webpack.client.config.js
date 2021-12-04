@@ -15,6 +15,7 @@ module.exports = {
   target: 'webworker',
   output: {
     filename: '[name].js',
+    publicPath: 'https://my-vite-webapp.s3.us-west-2.amazonaws.com/',
     path: path.resolve(__dirname, 'dist'),
     libraryTarget: 'this',
   },
@@ -44,16 +45,18 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, 'src', 'fastly', 'index.html'),
+      template: path.resolve(__dirname, 'src', 'fastly', 'template.html'),
+      filename: 'index.html',
+      inject: 'body',
     }),
-    // new CopyPlugin({
-    //   patterns: [
-    //     {
-    //       from: path.resolve(__dirname, 'dist', 'index.html'),
-    //       to: path.resolve(__dirname, 'src', 'fastly', 'index.html'),
-    //     },
-    //   ],
-    // }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, 'dist', 'index.html'),
+          to: path.resolve(__dirname, 'src', 'fastly', 'built.html'),
+        },
+      ],
+    }),
     new MiniCssExtractPlugin(),
     new webpack.ProvidePlugin({
       URL: 'core-js/web/url',
