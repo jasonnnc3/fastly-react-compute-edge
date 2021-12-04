@@ -16,8 +16,8 @@ module.exports = {
   target: 'webworker',
   output: {
     filename: '[name].js',
-    publicPath: 'https://my-vite-webapp.s3.us-west-2.amazonaws.com/',
-    path: path.resolve(__dirname, 'dist'),
+    publicPath: 'https://my-vite-webapp.s3.us-west-2.amazonaws.com/assets/',
+    path: path.resolve(__dirname, 'dist', 'assets'),
     libraryTarget: 'this',
   },
   module: {

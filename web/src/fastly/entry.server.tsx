@@ -3,13 +3,24 @@
 import 'regenerator-runtime/runtime.js';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import indexHtml from 'dist/index.html';
+import indexHtml from 'dist/assets/index.html';
 import { StaticRouter } from 'react-router-dom/server';
 import { App } from 'src/app';
 
 fastly.enableDebugLogging(true);
 
 addEventListener('fetch', (event) => event.respondWith(handleRequest(event)));
+
+const CONTENT_TYPE_BY_EXTENSION = {
+  '.js': 'application/javascript',
+  '.css': 'text/css',
+  '.png': 'image/png',
+  '.svg': 'image/svg+xml',
+} as const;
+
+function getContentType(url: URL) {
+  return CONTENT_TYPE_BY_EXTENSION[url.pathname.split('.').slice(-1)[0] as keyof typeof CONTENT_TYPE_BY_EXTENSION];
+}
 
 // @ts-ignore
 async function handleRequest({ request }) {
@@ -21,17 +32,15 @@ async function handleRequest({ request }) {
 
   const url = new URL(request.url);
 
-  // hardcoding in index.html until i figure out backends, i feel like theres a better way to do this, but it works for now
-  // TODO: cache header by revision
-  if (url.pathname === '/client.js') {
-    const res = await fetch('https://my-vite-webapp.s3.us-west-2.amazonaws.com/client.js', {
+  if (url.pathname.startsWith('/assets')) {
+    const res = await fetch(`https://my-vite-webapp.s3.us-west-2.amazonaws.com${url.pathname}`, {
       method: 'GET',
       backend: 'web_static_s3',
     });
 
     return new Response(await res.text(), {
       status: res.status,
-      headers: new Headers({ 'Content-Type': 'application/javascript' }),
+      headers: new Headers({ 'Content-Type': getContentType(url) }),
     });
   }
 
