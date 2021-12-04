@@ -12,12 +12,10 @@ module.exports = {
   optimization: {
     minimize: true,
   },
-  target: 'webworker',
   output: {
     filename: '[name]-[contenthash].js',
     publicPath: 'https://my-vite-webapp.s3.us-west-2.amazonaws.com/assets/',
     path: path.resolve(__dirname, 'dist', 'assets'),
-    libraryTarget: 'this',
   },
   module: {
     rules: [
