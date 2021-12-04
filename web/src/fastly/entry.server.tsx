@@ -4,7 +4,7 @@ import 'regenerator-runtime/runtime.js';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 // @ts-ignore
-import indexHtml from 'src/fastly/index.html';
+import indexHtml from 'dist/index.html';
 import { StaticRouter } from 'react-router-dom/server';
 import { App } from 'src/app';
 
@@ -42,7 +42,7 @@ async function handleRequest({ request }) {
     </StaticRouter>
   );
 
-  return new Response(indexHtml.replace(/<!-- SSR_INNER_HTML -->/, ssrHtml), {
+  return new Response(indexHtml.replace(/<div id="app"><\/div>/, `<div id="app">${ssrHtml}</div>`), {
     status: 200,
     headers: new Headers({ 'Content-Type': 'text/html; charset=utf-8' }),
   });

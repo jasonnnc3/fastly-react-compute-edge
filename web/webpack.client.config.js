@@ -1,18 +1,19 @@
 const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'production',
   entry: {
-    index: './src/fastly/entry.server.tsx',
+    client: './src/fastly/entry.client.tsx',
   },
   optimization: {
     minimize: true,
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'bin'),
+    path: path.resolve(__dirname, 'dist'),
   },
   module: {
     rules: [
@@ -38,8 +39,10 @@ module.exports = {
     modules: [path.resolve(__dirname, '.'), 'node_modules'],
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
-
   plugins: [
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, 'src', 'fastly', 'index.html'),
+    }),
     new MiniCssExtractPlugin(),
     new webpack.ProvidePlugin({
       URL: 'core-js/web/url',

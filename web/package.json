@@ -13,7 +13,8 @@
   "author": "oss@fastly.com",
   "main": "src/index.js",
   "scripts": {
-    "prebuild": "tsc & webpack",
+    "prebuild:client": "tsc & webpack --config webpack.client.config.js",
+    "prebuild:server": "tsc & webpack",
     "build": "js-compute-runtime --skip-pkg bin/index.js bin/main.wasm",
     "deploy": "npm run build && fastly compute deploy",
     "check-types": "tsc"
@@ -44,6 +45,7 @@
     "@types/react-dom": "^17.0.11",
     "autoprefixer": "^10.4.0",
     "css-loader": "^6.5.1",
+    "html-loader": "^3.0.1",
     "html-webpack-plugin": "^5.5.0",
     "husky": "^7.0.4",
     "lint-staged": "^12.1.2",
