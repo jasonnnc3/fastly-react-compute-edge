@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   mode: 'production',
@@ -45,6 +46,7 @@ module.exports = {
     // new HtmlWebpackPlugin({
     //   template: path.resolve(__dirname, 'src', 'fastly', 'index.html'),
     // }),
+    new CleanWebpackPlugin(),
     new MiniCssExtractPlugin(),
     new webpack.ProvidePlugin({
       URL: 'core-js/web/url',
