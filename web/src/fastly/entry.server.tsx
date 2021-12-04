@@ -22,8 +22,7 @@ function getContentType(url: URL) {
   return CONTENT_TYPE_BY_EXTENSION[url.pathname.split('.').slice(-1)[0] as keyof typeof CONTENT_TYPE_BY_EXTENSION];
 }
 
-// @ts-ignore
-async function handleRequest({ request }) {
+async function handleRequest({ request }: FetchEvent) {
   if (!['HEAD', 'GET'].includes(request.method)) {
     return new Response('This method is not allowed', {
       status: 405,
