@@ -40,6 +40,7 @@ module.exports = {
   },
 
   plugins: [
+    new HtmlWebpackPlugin(),
     new MiniCssExtractPlugin(),
     new webpack.ProvidePlugin({
       URL: 'core-js/web/url',

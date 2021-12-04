@@ -4,7 +4,7 @@ import 'regenerator-runtime/runtime.js';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 // @ts-ignore
-import indexHtml from 'dist/index.html';
+import indexHtml from 'bin/index.html';
 import { StaticRouter } from 'react-router-dom/server';
 import { App } from 'src/app';
 
