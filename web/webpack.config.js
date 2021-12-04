@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'production',
@@ -50,12 +51,10 @@ module.exports = {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
   plugins: [
-    // Polyfills go here.
-    // Used for, e.g., any cross-platform WHATWG,
-    // or core nodejs modules needed for your application.
+    new HtmlWebpackPlugin(),
+    new MiniCssExtractPlugin(),
     new webpack.ProvidePlugin({
       URL: 'core-js/web/url',
     }),
-    new MiniCssExtractPlugin(),
   ],
 };

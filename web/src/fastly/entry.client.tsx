@@ -7,5 +7,5 @@ ReactDOM.hydrate(
   <BrowserRouter>
     <App />
   </BrowserRouter>,
-  document.documentElement
+  document.getElementById('app')
 );

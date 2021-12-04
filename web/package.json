@@ -44,6 +44,7 @@
     "@types/react-dom": "^17.0.11",
     "autoprefixer": "^10.4.0",
     "css-loader": "^6.5.1",
+    "html-webpack-plugin": "^5.5.0",
     "husky": "^7.0.4",
     "lint-staged": "^12.1.2",
     "mini-css-extract-plugin": "^2.4.5",
