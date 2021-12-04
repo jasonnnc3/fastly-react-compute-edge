@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   mode: 'production',
@@ -38,6 +39,10 @@ module.exports = {
           cacheDirectory: true,
         },
       },
+      {
+        test: /module\.scss$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader'],
+      },
     ],
   },
   resolve: {
@@ -51,5 +56,6 @@ module.exports = {
     new webpack.ProvidePlugin({
       URL: 'core-js/web/url',
     }),
+    new MiniCssExtractPlugin(),
   ],
 };

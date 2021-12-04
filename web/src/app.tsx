@@ -1,48 +1,16 @@
 import React from 'react';
 import { Routes } from 'react-router';
-import { Link, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+import { About } from 'src/routes/about/about';
+import { Index } from 'src/routes/index';
+import { NotFound } from 'src/routes/not-found/not-found';
 
 export function App() {
   return (
     <Routes>
-      <Route
-        path="*"
-        element={
-          <>
-            <div>not found</div>
-            <Link to="/" reloadDocument>
-              to home
-            </Link>
-            <div>
-              <a href="https://github.com/jasonnnnnnnnnnnnn/fastly-react-compute-edge">view code</a>
-            </div>
-          </>
-        }
-      />
-      <Route
-        path="/"
-        element={
-          <>
-            <div>Home</div>
-            <Link to="/about">to about</Link>
-            <div>
-              <a href="https://github.com/jasonnnnnnnnnnnnn/fastly-react-compute-edge">view code</a>
-            </div>
-          </>
-        }
-      />
-      <Route
-        path="/about"
-        element={
-          <>
-            <div>About</div>
-            <Link to="/">to home</Link>
-            <div>
-              <a href="https://github.com/jasonnnnnnnnnnnnn/fastly-react-compute-edge">view code</a>
-            </div>
-          </>
-        }
-      />
+      <Route path="*" element={<NotFound />} />
+      <Route path="/" element={<Index />} />
+      <Route path="/about" element={<About />} />
     </Routes>
   );
 }
