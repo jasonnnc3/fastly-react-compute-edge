@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // installed via npm
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
@@ -13,10 +12,11 @@ module.exports = {
   optimization: {
     minimize: true,
   },
+  target: 'webworker',
   output: {
     filename: '[name].js',
-    publicPath: 'https://my-vite-webapp.s3.us-west-2.amazonaws.com/',
     path: path.resolve(__dirname, 'dist'),
+    libraryTarget: 'this',
   },
   module: {
     rules: [
@@ -43,18 +43,17 @@ module.exports = {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
   plugins: [
-    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      // template: path.resolve(__dirname, 'src', 'fastly', 'index.html'),
+      template: path.resolve(__dirname, 'src', 'fastly', 'index.html'),
     }),
-    new CopyPlugin({
-      patterns: [
-        {
-          from: path.resolve(__dirname, 'dist', 'index.html'),
-          to: path.resolve(__dirname, 'src', 'ssr_template.html'),
-        },
-      ],
-    }),
+    // new CopyPlugin({
+    //   patterns: [
+    //     {
+    //       from: path.resolve(__dirname, 'dist', 'index.html'),
+    //       to: path.resolve(__dirname, 'src', 'fastly', 'index.html'),
+    //     },
+    //   ],
+    // }),
     new MiniCssExtractPlugin(),
     new webpack.ProvidePlugin({
       URL: 'core-js/web/url',

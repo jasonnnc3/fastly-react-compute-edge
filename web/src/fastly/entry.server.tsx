@@ -3,7 +3,8 @@
 import 'regenerator-runtime/runtime.js';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import indexHtml from 'src/ssr_template.html';
+// @ts-ignore
+import indexHtml from 'src/fastly/index.html';
 import { StaticRouter } from 'react-router-dom/server';
 import { App } from 'src/app';
 
