@@ -11,8 +11,7 @@ npm-api:
 	@$(EXIT_ON_ERROR) cd api && npm install
 
 web-build: npm
-	@$(EXIT_ON_ERROR) cd web && npm run prebuild:client
-	@$(EXIT_ON_ERROR) cd web && npm run prebuild:server
+	@$(EXIT_ON_ERROR) cd web && npm run prebuild
 	@$(EXIT_ON_ERROR) aws s3 sync ./web/bin/ s3://my-vite-webapp/
 
 dev: web-build
