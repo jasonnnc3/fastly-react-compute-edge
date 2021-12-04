@@ -42,7 +42,7 @@ async function handleRequest({ request }) {
     </StaticRouter>
   );
 
-  return new Response(indexHtml.replace(/<!-- SSR_INNER_HTML -->/, ssrHtml), {
+  return new Response(indexHtml.replace(/<div id="app"><\/div>/, `<div id="app">${ssrHtml}</div>`), {
     status: 200,
     headers: new Headers({ 'Content-Type': 'text/html; charset=utf-8' }),
   });
