@@ -7,7 +7,6 @@ module.exports = {
   mode: 'production',
   entry: {
     index: './src/fastly/entry.server.tsx',
-    client: './src/fastly/entry.client.tsx',
   },
   optimization: {
     minimize: true,
@@ -43,9 +42,9 @@ module.exports = {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, 'src', 'fastly', 'index.html'),
-    }),
+    // new HtmlWebpackPlugin({
+    //   template: path.resolve(__dirname, 'src', 'fastly', 'index.html'),
+    // }),
     new MiniCssExtractPlugin(),
     new webpack.ProvidePlugin({
       URL: 'core-js/web/url',
