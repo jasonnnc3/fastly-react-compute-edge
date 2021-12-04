@@ -14,7 +14,7 @@ module.exports = {
   },
   output: {
     filename: '[name]-[contenthash].js',
-    publicPath: 'https://my-vite-webapp.s3.us-west-2.amazonaws.com/assets/',
+    publicPath: '/assets/',
     path: path.resolve(__dirname, 'dist', 'assets'),
   },
   module: {
@@ -22,6 +22,9 @@ module.exports = {
       {
         test: /\.html$/i,
         loader: 'html-loader',
+        options: {
+          sources: false,
+        },
       },
       {
         test: /\.(ts|js)x?$/,

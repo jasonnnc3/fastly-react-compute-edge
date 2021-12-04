@@ -12,14 +12,21 @@ fastly.enableDebugLogging(true);
 addEventListener('fetch', (event) => event.respondWith(handleRequest(event)));
 
 const CONTENT_TYPE_BY_EXTENSION = {
-  '.js': 'application/javascript',
-  '.css': 'text/css',
-  '.png': 'image/png',
-  '.svg': 'image/svg+xml',
+  js: 'application/javascript',
+  css: 'text/css',
+  png: 'image/png',
+  svg: 'image/svg+xml',
 } as const;
 
 function getContentType(url: URL) {
-  return CONTENT_TYPE_BY_EXTENSION[url.pathname.split('.').slice(-1)[0] as keyof typeof CONTENT_TYPE_BY_EXTENSION];
+  const fileExtension = url.pathname.split('.').slice(-1)[0] as keyof typeof CONTENT_TYPE_BY_EXTENSION;
+  const contentType = CONTENT_TYPE_BY_EXTENSION[fileExtension];
+
+  if (!contentType) {
+    throw new Error(`Missing content type for: ${fileExtension}`);
+  }
+
+  return contentType;
 }
 
 async function handleRequest({ request }: FetchEvent) {
@@ -39,7 +46,7 @@ async function handleRequest({ request }: FetchEvent) {
 
     return new Response(await res.text(), {
       status: res.status,
-      headers: new Headers({ 'Content-Type': getContentType(url) }),
+      headers: new Headers({ 'Content-Type': getContentType(url), 'Cache-Control': 'public, max-age=31536000' }),
     });
   }
 
