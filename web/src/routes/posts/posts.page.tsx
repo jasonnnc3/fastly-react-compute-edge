@@ -22,13 +22,13 @@ export function PostsPage({ posts }: PostsProps) {
       <h1>Posts</h1>
       <ul>
         {posts.map(({ title, content, id }) => (
-          <>
+          <React.Fragment key={id}>
             <h2>{title}</h2>
             <Link to="/posts/:id" params={{ id }}>
               view post page for {id}
             </Link>
             <p>{content}</p>
-          </>
+          </React.Fragment>
         ))}
       </ul>
       <div>
