@@ -2,7 +2,7 @@
   "license": "MIT",
   "scripts": {
     "webpack": "webpack --config webpack.client.config.js && webpack --config webpack.server.config.js",
-    "build": "js-compute-runtime --skip-pkg bin/index.js bin/main.wasm",
+    "build": "js-compute-runtime bin/index.js bin/main.wasm",
     "deploy": "npm run build && fastly compute deploy",
     "type-check": "tsc"
   },
