@@ -1,16 +1,10 @@
 // @ts-check
-const fs = require('fs');
-const path = require('path');
-const express = require('express');
+import fs from 'fs';
+import path from 'path';
+import express from 'express';
 
 async function createServer(root = process.cwd()) {
-  const resolve = (p) => path.resolve(__dirname, '..', p);
-
   const app = express();
-
-  /**
-   * @type {import('vite').ViteDevServer}
-   */
   const vite = await require('vite').createServer({
     root,
     logLevel: 'info',
@@ -30,27 +24,30 @@ async function createServer(root = process.cwd()) {
   app.use('*', async (req, res) => {
     try {
       const url = req.originalUrl;
+      const template = await vite.transformIndexHtml(
+        url,
+        fs.readFileSync(path.resolve(__dirname, '..', 'index.html'), 'utf-8')
+      );
+      const { render } = await vite.ssrLoadModule('/vite/entry.server.jsx');
+      const context: { url?: string } = {};
 
-      let template, render;
-      // always read fresh template in dev
-      template = fs.readFileSync(resolve('index.html'), 'utf-8');
-      template = await vite.transformIndexHtml(url, template);
-      render = (await vite.ssrLoadModule('/vite/entry.server.jsx')).render;
+      // fetch data in dev from fake json and pass to here or something
 
-      const context = {};
       const appHtml = render(url, context);
-
-      if (context.url) {
-        // Somewhere a `<Redirect>` was rendered
-        return res.redirect(301, context.url);
-      }
+      //
+      // if (context.url) {
+      //   // Somewhere a `<Redirect>` was rendered
+      //   return res.redirect(301, context.url);
+      // }
 
       const html = template.replace('<div id="app"></div>', `<div id="app">${appHtml}</div>`);
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
     } catch (e) {
       vite.ssrFixStacktrace(e);
+      // @ts-ignore
       console.log(e.stack);
+      // @ts-ignore
       res.status(500).end(e.stack);
     }
   });
