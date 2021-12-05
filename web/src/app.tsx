@@ -28,7 +28,6 @@ interface AppProps {
 }
 
 export function App({ pageProps }: AppProps) {
-  console.log(pageProps);
   return (
     <>
       {renderHeader()}
@@ -36,7 +35,7 @@ export function App({ pageProps }: AppProps) {
         <Route path="*" element={<NotFoundPage />} />
         {routes.map(({ path, element: Element }) => (
           //@ts-expect-error
-          <Route key={path} path={path} element={<Element {...pageProps} />} />
+          <Route path={path} element={<Element {...pageProps} />} />
         ))}
       </Routes>
     </>
@@ -44,7 +43,7 @@ export function App({ pageProps }: AppProps) {
 
   function renderHeader() {
     return (
-      <nav className="uk-navbar-container">
+      <nav className="uk-navbar-container" uk-navbar>
         <div className="uk-navbar-left">
           <ul className="uk-navbar-nav">
             <li>

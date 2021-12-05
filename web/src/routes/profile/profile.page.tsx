@@ -9,7 +9,7 @@ interface ProfileProps {
 }
 
 ProfilePage.fetchSSRProps = async () => {
-  const profile = await fetchFastlyBackend<Profile>('web_api', '/api/profile');
+  const profile = await fetchFastlyBackend<Profile>('web_api', '/profile');
 
   return {
     profile,
