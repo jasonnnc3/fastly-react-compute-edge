@@ -2,11 +2,42 @@
   "posts": [
     {
       "id": 1,
-      "title": "hello"
+      "title": "how to do stuff",
+      "content": "this is some blog content"
+    },
+        {
+      "id": 2,
+      "title": "blog post 2",
+      "content": "this is some blog content"
+    },
+        {
+      "id": 3,
+      "title": "blog post 2",
+      "content": "this is some blog content"
+    },
+        {
+      "id": 4,
+      "title": "blog post 3",
+      "content": "this is some blog content"
+    },
+        {
+      "id": 5,
+      "title": "blog post 4",
+      "content": "this is some blog content"
+    },
+        {
+      "id": 6,
+      "title": "blog post 5",
+      "content": "this is some blog content"
     }
+
   ],
   "profile": {
     "name": "my name",
-    "email": "my@email.com"
+    "email": "my@email.com",
+    "street": "123 fake street",
+    "city": "san francisco",
+    "state": "CA",
+    "createdAt": "Dec 4, 2021"
   }
 }
