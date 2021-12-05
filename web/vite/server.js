@@ -2,6 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 const express = require('express');
+const matchPath = require('react-router-dom').matchPath;
 
 async function createServer(root = process.cwd()) {
   const resolve = (p) => path.resolve(__dirname, '..', p);
@@ -38,14 +39,20 @@ async function createServer(root = process.cwd()) {
       render = (await vite.ssrLoadModule('/vite/entry.server.jsx')).render;
 
       const context = {};
-      const appHtml = render(url, context);
+      const pageProps = fakedata();
+      const appHtml = render(url, context, pageProps);
 
       if (context.url) {
         // Somewhere a `<Redirect>` was rendered
         return res.redirect(301, context.url);
       }
 
-      const html = template.replace('<div id="app"></div>', `<div id="app">${appHtml}</div>`);
+      const html = template
+        .replace(/<div id="app"><\/div>/, `<div id="app">${appHtml}</div>`)
+        .replace(
+          '<script id="__SSR_PROPS__" type="application/json"></script>',
+          `<script id="__SSR_PROPS__" type="application/json">${JSON.stringify(pageProps)}</script>`
+        );
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
     } catch (e) {
@@ -56,6 +63,10 @@ async function createServer(root = process.cwd()) {
   });
 
   return { app, vite };
+}
+
+function fakedata(pathname) {
+  return JSON.parse(fs.readFileSync(path.resolve(__dirname, '..', 'fake', 'posts.json')).toString());
 }
 
 createServer().then(({ app }) =>
