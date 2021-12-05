@@ -10,4 +10,4 @@ export const routes = [
     path: '/about',
     element: About,
   },
-];
+] as const;

@@ -44,8 +44,6 @@ async function handleRequest({ request }: FetchEvent) {
 
   const pageProps = await fetchProps();
 
-  console.log('oageprops', pageProps);
-
   const ssrHtml = ReactDOMServer.renderToString(
     <StaticRouter location={url}>
       <App pageProps={pageProps} />
@@ -95,9 +93,9 @@ async function fetchAssets(url: URL) {
 
 async function fetchProps() {
   try {
-    const res = await fetch(`https://abnormally-sterling-tiger.edgecompute.app/api/usertest`, {
+    const res = await fetch(`https://my-json-server.typicode.com/jasonnnnnnnnnnnnn/fastly-react-compute-edge/db`, {
       method: 'GET',
-      backend: 'web_edge_api',
+      backend: 'web_api',
     });
 
     return await res.text();

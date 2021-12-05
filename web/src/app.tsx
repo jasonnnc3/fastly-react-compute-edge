@@ -9,13 +9,12 @@ interface AppProps {
 }
 
 export function App({ pageProps }: AppProps) {
-  console.log(pageProps);
-
   return (
     <Routes>
       <Route path="*" element={<NotFound />} />
       {routes.map(({ path, element: Element }) => {
-        return <Route path={path} element={<Element />} />;
+        // @ts-ignore
+        return <Route path={path} element={<Element {...pageProps} />} />;
       })}
     </Routes>
   );
