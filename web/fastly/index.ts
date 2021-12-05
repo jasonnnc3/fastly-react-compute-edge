@@ -8,7 +8,7 @@ export interface FetchSSRPropsParams {
 export const backendConfig = {
   web_api: 'https://my-json-server.typicode.com/jasonnnnnnnnnnnnn/fastly-react-compute-edge',
   web_static_s3: 'https://my-vite-webapp.s3.us-west-2.amazonaws.com',
-};
+} as const;
 
 export async function fetchFastlyBackend<Data>(backend: keyof typeof backendConfig, pathname: `${string}`) {
   const res = await fetch(backendConfig[backend] + pathname, {
