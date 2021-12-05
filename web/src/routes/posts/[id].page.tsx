@@ -17,7 +17,6 @@ interface PostProps {
 }
 
 export function PostPage({ post: { title, content } }: PostProps) {
-  console.log(title, content);
   return (
     <>
       <h1>{title}</h1>
