@@ -8,7 +8,7 @@ interface PostProps {
 }
 
 PostPage.fetchSSRProps = async ({ params }: FetchSSRPropsParams) => {
-  const post = await fetchFastlyBackend<Post>('web_api', `/posts/${params.id}`);
+  const post = await fetchFastlyBackend<Post>('web_api', `/api/posts/${params.id}`);
 
   return {
     post,
