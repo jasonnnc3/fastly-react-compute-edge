@@ -43,7 +43,7 @@ export function App({ pageProps }: AppProps) {
 
   function renderHeader() {
     return (
-      <nav className="uk-navbar-container" uk-navbar="true">
+      <nav className="uk-navbar-container" uk-navbar>
         <div className="uk-navbar-left">
           <ul className="uk-navbar-nav">
             <li>

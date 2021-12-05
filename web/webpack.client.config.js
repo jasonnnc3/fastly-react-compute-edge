@@ -47,7 +47,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, 'index.html'),
+      template: path.resolve(__dirname, 'fastly', 'template.html'),
       filename: 'index.html',
       inject: 'body',
     }),
