@@ -33,7 +33,7 @@ export function PostsPage({ posts }: PostsProps) {
       </ul>
       <div>
         <a
-          href="https://github.com/jasonnnnnnnnnnnnn/fastly-react-compute-edge"
+          href="https://github.com/jasonnnnnnnnnnnnn/fastly-react-compute-edge/tree/main/web"
           target="_blank"
           rel="noreferrer nofollow"
           className={styles.someClass}

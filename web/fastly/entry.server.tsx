@@ -58,7 +58,7 @@ async function getPageProps(pathname: string) {
 
     if (pathMatch) {
       const { pathname, params } = pathMatch;
-      //@ts-ignore
+      // @ts-expect-error
       return await (route?.element?.fetchSSRProps?.({ pathname, params }) || Promise.resolve('{}'));
     }
   }

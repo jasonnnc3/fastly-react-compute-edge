@@ -1,20 +1,19 @@
-import { fetchFastlyBackend } from 'fastly';
+import { fetchFastlyBackend, FetchSSRPropsParams } from 'fastly';
 import React from 'react';
 import { Post } from 'src/app';
 import styles from 'src/routes/profile/profile.module.scss';
 
-// TODO: fix fetchSSRProps type inference
-PostPage.fetchSSRProps = async ({ params }: { params: { id: string } }) => {
+interface PostProps {
+  post: Post;
+}
+
+PostPage.fetchSSRProps = async ({ params }: FetchSSRPropsParams) => {
   const post = await fetchFastlyBackend<Post>('web_api', `/posts/${params.id}`);
 
   return {
     post,
   };
 };
-
-interface PostProps {
-  post: Post;
-}
 
 export function PostPage({ post: { title, content } }: PostProps) {
   return (
@@ -23,7 +22,7 @@ export function PostPage({ post: { title, content } }: PostProps) {
       <p>{content}</p>
       <div>
         <a
-          href="https://github.com/jasonnnnnnnnnnnnn/fastly-react-compute-edge"
+          href="https://github.com/jasonnnnnnnnnnnnn/fastly-react-compute-edge/tree/main/web"
           target="_blank"
           rel="noreferrer nofollow"
           className={styles.someClass}

@@ -8,11 +8,6 @@ interface ProfileProps {
   profile: Profile;
 }
 
-// create component wrapper to infer prop type definitions
-/**
- * export function EdgeComponent(Component, fetchSSRPropsFn)
- * pseudo redux connect
- */
 ProfilePage.fetchSSRProps = async () => {
   const profile = await fetchFastlyBackend<Profile>('web_api', '/profile');
 
@@ -35,7 +30,7 @@ export function ProfilePage({ profile }: ProfileProps) {
       <Link to="/">to home</Link>
       <div>
         <a
-          href="https://github.com/jasonnnnnnnnnnnnn/fastly-react-compute-edge"
+          href="https://github.com/jasonnnnnnnnnnnnn/fastly-react-compute-edge/tree/main/web"
           target="_blank"
           rel="noreferrer nofollow"
           className={styles.someClass}
