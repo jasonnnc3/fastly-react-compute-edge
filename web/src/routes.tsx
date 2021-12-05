@@ -1,32 +1,29 @@
-import { Post } from 'src/routes/posts/[id]';
-import { Posts } from 'src/routes/posts/posts';
-import { ProfilePage } from 'src/routes/profile/profile';
-import { Index } from 'src/routes/index';
+import { PostPage } from 'src/routes/posts/[id].page';
+import { PostsPage } from 'src/routes/posts/posts.page';
+import { ProfilePage } from 'src/routes/profile/profile.page';
+import { IndexPage } from 'src/routes/index/index.page';
 
 export interface FastlyReactRoute {
   path: string;
   element: JSX.Element;
-  fetchProps?<T>(): T;
+  fetchSSRProps?: () => Promise<unknown>;
 }
 
 export const routes = [
   {
     path: '/',
-    element: Index,
+    element: IndexPage,
   },
   {
     path: '/profile',
     element: ProfilePage,
-    fetchProps: ProfilePage.fetchProps,
   },
   {
     path: '/posts',
-    element: Posts,
-    fetchProps: Posts.fetchProps,
+    element: PostsPage,
   },
   {
     path: '/posts/:id',
-    element: Post,
-    fetchProps: Post.fetchProps,
+    element: PostPage,
   },
 ] as const;

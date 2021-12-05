@@ -1,14 +1,7 @@
 import React from 'react';
 import styles from './index.module.scss';
 
-Index.fetchProps = () => {
-  console.log('fetching everything');
-};
-
-export function Index(props: Record<any, any>) {
-  console.log(props);
-  return null;
-
+export function IndexPage() {
   return (
     <>
       <h1>fastly compute@edge react SSR example</h1>

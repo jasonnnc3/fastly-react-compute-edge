@@ -1,11 +1,12 @@
 import React from 'react';
 import { Routes } from 'react-router';
 import { Route } from 'react-router-dom';
-import { NotFound } from 'src/routes/not-found/not-found';
+import { Link } from 'src/components/link/link';
+import { NotFoundPage } from 'src/routes/not-found/not-found.page';
 import { routes } from 'src/routes';
 
 export interface Post {
-  id: number;
+  id: string;
   title: string;
   content: string;
 }
@@ -27,13 +28,11 @@ interface AppProps {
 }
 
 export function App({ pageProps }: AppProps) {
-  console.log(pageProps);
-  return null;
   return (
     <>
       {renderHeader()}
       <Routes>
-        <Route path="*" element={<NotFound />} />
+        <Route path="*" element={<NotFoundPage />} />
         {routes.map(({ path, element: Element }) => (
           //@ts-expect-error
           <Route path={path} element={<Element {...pageProps} />} />
@@ -48,22 +47,13 @@ export function App({ pageProps }: AppProps) {
         <div className="uk-navbar-left">
           <ul className="uk-navbar-nav">
             <li>
-              <a href="#">Home</a>
+              <Link to="/">Home</Link>
             </li>
             <li>
-              <a href="#">Posts</a>
-              <div className="uk-navbar-dropdown">
-                <ul className="uk-nav uk-navbar-dropdown-nav">
-                  {pageProps.posts.map((post) => (
-                    <li>
-                      <a href="#">{post.title}</a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <Link to="/posts">Posts</Link>
             </li>
             <li>
-              <a href="#">Profile</a>
+              <Link to="/profile">Profile</Link>
             </li>
           </ul>
         </div>

@@ -1,20 +1,22 @@
+import { fetchFastlyBackend } from 'fastly';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Post } from 'src/app';
+import { Link } from 'src/components/link/link';
 import styles from 'src/routes/profile/profile.module.scss';
 
 interface PostsProps {
   posts: Post[];
 }
 
-Posts.fetchProps = () => {
-  console.log('hello im fetching posts');
+PostsPage.fetchSSRProps = async () => {
+  const posts = await fetchFastlyBackend<Post[]>('web_api', '/posts');
+
+  return {
+    posts,
+  };
 };
 
-export function Posts(props: PostsProps) {
-  console.log(props);
-  return null;
-  const posts = [];
+export function PostsPage({ posts }: PostsProps) {
   return (
     <>
       <h1>Posts</h1>
@@ -22,7 +24,7 @@ export function Posts(props: PostsProps) {
         {posts.map(({ title, content, id }) => (
           <>
             <h2>{title}</h2>
-            <Link to={`/posts/${id}`} reloadDocument>
+            <Link to="/posts/:id" params={{ id }}>
               view post page for {id}
             </Link>
             <p>{content}</p>

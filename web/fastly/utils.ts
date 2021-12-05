@@ -1,7 +1,9 @@
 /// <reference types="@fastly/js-compute" />
 
+import { backendConfig } from 'fastly/index';
+
 export async function fetchAssets(url: URL) {
-  const res = await fetch(`https://my-vite-webapp.s3.us-west-2.amazonaws.com${url.pathname}`, {
+  const res = await fetch(backendConfig['web_static_s3'] + url.pathname, {
     method: 'GET',
     backend: 'web_static_s3',
   });
@@ -11,21 +13,6 @@ export async function fetchAssets(url: URL) {
     status: res.status,
     headers: new Headers({ 'Content-Type': getContentType(url), 'Cache-Control': 'public, max-age=31536000' }),
   });
-}
-
-export async function fetchProps() {
-  try {
-    const res = await fetch(`https://my-json-server.typicode.com/jasonnnnnnnnnnnnn/fastly-react-compute-edge/db`, {
-      method: 'GET',
-      backend: 'web_api',
-    });
-
-    // TODO: stream this https://developer.fastly.com/learning/compute/javascript/#parsing-and-transforming-responses
-    return await res.text();
-  } catch (e) {
-    console.log('errored fetching');
-    return {};
-  }
 }
 
 const CONTENT_TYPE_BY_EXTENSION = {

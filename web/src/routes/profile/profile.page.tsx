@@ -1,20 +1,27 @@
+import { fetchFastlyBackend } from 'fastly';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Profile } from 'src/app';
+import { Link } from 'src/components/link/link';
 import styles from 'src/routes/profile/profile.module.scss';
 
 interface ProfileProps {
   profile: Profile;
 }
 
-ProfilePage.fetchProps = () => {
-  console.log('hello im fetching profile');
+// create component wrapper to infer prop type definitions
+/**
+ * export function EdgeComponent(Component, fetchSSRPropsFn)
+ * pseudo redux connect
+ */
+ProfilePage.fetchSSRProps = async () => {
+  const profile = await fetchFastlyBackend<Profile>('web_api', '/profile');
+
+  return {
+    profile,
+  };
 };
 
-export function ProfilePage(props: ProfileProps) {
-  console.log(props);
-  return null;
-  const profile = {};
+export function ProfilePage({ profile }: ProfileProps) {
   return (
     <>
       <h1>profile</h1>
@@ -25,9 +32,7 @@ export function ProfilePage(props: ProfileProps) {
           </li>
         ))}
       </ul>
-      <Link to="/" reloadDocument>
-        to home
-      </Link>
+      <Link to="/">to home</Link>
       <div>
         <a
           href="https://github.com/jasonnnnnnnnnnnnn/fastly-react-compute-edge"

@@ -1,14 +1,13 @@
 /// <reference types="@fastly/js-compute" />
 
-import 'regenerator-runtime/runtime.js';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import indexHtml from 'dist/assets/index.html';
+import { matchPath } from 'react-router';
 import { StaticRouter } from 'react-router-dom/server';
 import { App } from 'src/app';
-import { fetchAssets, fetchProps } from 'fastly/utils';
-import { matchPath } from 'react-router-dom';
-import { FastlyReactRoute, routes } from 'src/routes';
+import { fetchAssets } from 'fastly/utils';
+import { routes } from 'src/routes';
 
 fastly.enableDebugLogging(true);
 
@@ -27,15 +26,8 @@ async function handleRequest({ request }: FetchEvent) {
     return await fetchAssets(url);
   }
 
-  const pageProps = await fetchProps();
+  const pageProps = await getPageProps(url.pathname);
 
-  // const activeRoute = routes.find((route) => matchPath(route.path, url.pathname));
-
-  // if (activeRoute?.fetchProps) {
-  //   activeRoute.fetchProps();
-  // }
-
-  // @ts-ignore
   const ssrHtml = ReactDOMServer.renderToString(
     <StaticRouter location={url}>
       {/*// @ts-ignore*/}
@@ -49,11 +41,17 @@ async function handleRequest({ request }: FetchEvent) {
       .replace(/<div id="app"><\/div>/, `<div id="app">${ssrHtml}</div>`)
       .replace(
         '<script id="__SSR_PROPS__" type="application/json"></script>',
-        `<script id="__SSR_PROPS__" type="application/json">${pageProps}</script>`
+        `<script id="__SSR_PROPS__" type="application/json">${JSON.stringify(pageProps)}</script>`
       ),
     {
       status: 200,
       headers: new Headers({ 'Content-Type': 'text/html; charset=utf-8' }),
     }
   );
+}
+
+async function getPageProps(pathname: string) {
+  const activeRoute = routes.find((route) => matchPath(route.path, pathname));
+  //@ts-ignore
+  return await (activeRoute?.element?.fetchSSRProps?.(pathname) || Promise.resolve('{}'));
 }
