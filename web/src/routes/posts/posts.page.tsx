@@ -9,7 +9,7 @@ interface PostsProps {
 }
 
 PostsPage.fetchSSRProps = async () => {
-  const posts = await fetchFastlyBackend<Post[]>('web_api', '/posts');
+  const posts = await fetchFastlyBackend<Post[]>('web_api', '/api/posts');
 
   return {
     posts,
