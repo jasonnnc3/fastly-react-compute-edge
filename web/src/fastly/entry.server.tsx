@@ -51,7 +51,6 @@ async function handleRequest({ request }: FetchEvent) {
       return matchPath(route.path, url.pathname);
     }) || ({} as FastlyReactRoute);
 
-  console.log('\n\n\n\nthis is active route\n\n\n\n', JSON.stringify(activeRoute));
   if (activeRoute.fetchProps) {
     activeRoute.fetchProps();
   }
@@ -61,20 +60,6 @@ async function handleRequest({ request }: FetchEvent) {
       <App pageProps={pageProps} />
     </StaticRouter>
   );
-
-  // need to do this for per path fetch endpoints eventually
-  // const activeRoute = routes.find((route) =>
-  //   matchPath(route.path, req.url)
-  // ) || {}
-  //
-  // const promise = activeRoute.fetchInitialData
-  //   ? activeRoute.fetchInitialData(req.path)
-  //   : Promise.resolve()
-  //
-  // promise.then((data) => {
-  //   const markup = ReactDOM.renderToString(
-  //     <App serverData={data} />
-  //   )
 
   // figure out how to persist comments with htmlwebpackplugin so dont need to replace entire element
   return new Response(
