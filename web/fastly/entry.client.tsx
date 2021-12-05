@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { App } from 'src/app';
 
-// @ts-ignore
+// @ts-expect-error
 const pageProps = JSON.parse(document.getElementById('__SSR_PROPS__').textContent);
 
 ReactDOM.hydrate(

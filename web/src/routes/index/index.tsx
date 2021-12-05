@@ -1,44 +1,25 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import styles from './index.module.scss';
 
-interface Post {
-  id: number;
-  title: string;
-}
-
-interface IndexProps {
-  posts: Post[];
-}
-
 Index.fetchProps = () => {
-  console.log('hello im fetching posts');
+  console.log('fetching everything');
 };
 
-export function Index({ posts }: IndexProps) {
-  console.log('index posts', posts);
-
-  if (!posts) {
-    return null;
-  }
+export function Index(props: Record<any, any>) {
+  console.log(props);
+  return null;
 
   return (
     <>
-      <h1>Home</h1>
-      <h2>posts</h2>
-      <ul>
-        {posts.map((post) => (
-          <>
-            <li>{post.id}</li>
-            <li>{post.title}</li>
-          </>
-        ))}
-      </ul>
-      <Link to="/about" reloadDocument>
-        to about
-      </Link>
+      <h1>fastly compute@edge react SSR example</h1>
+      <p>welcome to the example, click a link to view data fetching in action. add some docs stuff in mdx maybe</p>
       <div>
-        <a href="https://github.com/jasonnnnnnnnnnnnn/fastly-react-compute-edge" className={styles.someClass}>
+        <a
+          href="https://github.com/jasonnnnnnnnnnnnn/fastly-react-compute-edge"
+          target="_blank"
+          rel="noreferrer nofollow"
+          className={styles.someClass}
+        >
           view code
         </a>
       </div>

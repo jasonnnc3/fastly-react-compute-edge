@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
   mode: 'production',
   entry: {
-    index: './src/fastly/entry.server.tsx',
+    index: './fastly/entry.server.tsx',
   },
   optimization: {
     minimize: true,

@@ -1,4 +1,6 @@
-import { About } from 'src/routes/about/about';
+import { Post } from 'src/routes/posts/[id]';
+import { Posts } from 'src/routes/posts/posts';
+import { ProfilePage } from 'src/routes/profile/profile';
 import { Index } from 'src/routes/index';
 
 export interface FastlyReactRoute {
@@ -11,11 +13,20 @@ export const routes = [
   {
     path: '/',
     element: Index,
-    fetchProps: Index.fetchProps,
   },
   {
-    path: '/about',
-    element: About,
-    fetchProps: About.fetchProps,
+    path: '/profile',
+    element: ProfilePage,
+    fetchProps: ProfilePage.fetchProps,
+  },
+  {
+    path: '/posts',
+    element: Posts,
+    fetchProps: Posts.fetchProps,
+  },
+  {
+    path: '/posts/:id',
+    element: Post,
+    fetchProps: Post.fetchProps,
   },
 ] as const;

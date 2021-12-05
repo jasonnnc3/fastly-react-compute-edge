@@ -7,7 +7,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = {
   mode: 'production',
   entry: {
-    client: './src/fastly/entry.client.tsx',
+    client: './fastly/entry.client.tsx',
   },
   optimization: {
     minimize: true,
@@ -47,7 +47,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, 'src', 'fastly', 'template.html'),
+      template: path.resolve(__dirname, 'fastly', 'template.html'),
       filename: 'index.html',
       inject: 'body',
     }),

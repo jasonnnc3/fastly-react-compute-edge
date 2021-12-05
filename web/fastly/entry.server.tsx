@@ -4,32 +4,15 @@ import 'regenerator-runtime/runtime.js';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import indexHtml from 'dist/assets/index.html';
-import { matchPath } from 'react-router-dom';
 import { StaticRouter } from 'react-router-dom/server';
 import { App } from 'src/app';
+import { fetchAssets, fetchProps } from 'fastly/utils';
+import { matchPath } from 'react-router-dom';
 import { FastlyReactRoute, routes } from 'src/routes';
 
 fastly.enableDebugLogging(true);
 
 addEventListener('fetch', (event) => event.respondWith(handleRequest(event)));
-
-const CONTENT_TYPE_BY_EXTENSION = {
-  js: 'application/javascript',
-  css: 'text/css',
-  png: 'image/png',
-  svg: 'image/svg+xml',
-} as const;
-
-function getContentType(url: URL) {
-  const fileExtension = url.pathname.split('.').slice(-1)[0] as keyof typeof CONTENT_TYPE_BY_EXTENSION;
-  const contentType = CONTENT_TYPE_BY_EXTENSION[fileExtension];
-
-  if (!contentType) {
-    throw new Error(`Missing content type for: ${fileExtension}`);
-  }
-
-  return contentType;
-}
 
 async function handleRequest({ request }: FetchEvent) {
   if (!['HEAD', 'GET'].includes(request.method)) {
@@ -46,17 +29,16 @@ async function handleRequest({ request }: FetchEvent) {
 
   const pageProps = await fetchProps();
 
-  const activeRoute =
-    routes.find((route) => {
-      return matchPath(route.path, url.pathname);
-    }) || ({} as FastlyReactRoute);
+  // const activeRoute = routes.find((route) => matchPath(route.path, url.pathname));
 
-  if (activeRoute.fetchProps) {
-    activeRoute.fetchProps();
-  }
+  // if (activeRoute?.fetchProps) {
+  //   activeRoute.fetchProps();
+  // }
 
+  // @ts-ignore
   const ssrHtml = ReactDOMServer.renderToString(
     <StaticRouter location={url}>
+      {/*// @ts-ignore*/}
       <App pageProps={pageProps} />
     </StaticRouter>
   );
@@ -74,30 +56,4 @@ async function handleRequest({ request }: FetchEvent) {
       headers: new Headers({ 'Content-Type': 'text/html; charset=utf-8' }),
     }
   );
-}
-
-async function fetchAssets(url: URL) {
-  const res = await fetch(`https://my-vite-webapp.s3.us-west-2.amazonaws.com${url.pathname}`, {
-    method: 'GET',
-    backend: 'web_static_s3',
-  });
-
-  return new Response(await res.text(), {
-    status: res.status,
-    headers: new Headers({ 'Content-Type': getContentType(url), 'Cache-Control': 'public, max-age=31536000' }),
-  });
-}
-
-async function fetchProps() {
-  try {
-    const res = await fetch(`https://my-json-server.typicode.com/jasonnnnnnnnnnnnn/fastly-react-compute-edge/db`, {
-      method: 'GET',
-      backend: 'web_api',
-    });
-
-    return await res.text();
-  } catch (e) {
-    console.log('errored fetching');
-    return {};
-  }
 }

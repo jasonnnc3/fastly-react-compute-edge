@@ -7,10 +7,17 @@ export function NotFound() {
     <div className={styles.someClass}>
       <div>not found</div>
       <Link to="/" reloadDocument>
-        to home
+        go to home
       </Link>
       <div>
-        <a href="https://github.com/jasonnnnnnnnnnnnn/fastly-react-compute-edge">view code</a>
+        <a
+          href="https://github.com/jasonnnnnnnnnnnnn/fastly-react-compute-edge"
+          target="_blank"
+          rel="noreferrer nofollow"
+          className={styles.someClass}
+        >
+          view code
+        </a>
       </div>
     </div>
   );
