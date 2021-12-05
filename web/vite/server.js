@@ -33,7 +33,7 @@ async function createServer(root = process.cwd()) {
 
       let template, render;
       // always read fresh template in dev
-      template = fs.readFileSync(resolve('index.html'), 'utf-8');
+      template = fs.readFileSync(resolve('fastly/template.html'), 'utf-8');
       template = await vite.transformIndexHtml(url, template);
       render = (await vite.ssrLoadModule('/vite/entry.server.jsx')).render;
 
