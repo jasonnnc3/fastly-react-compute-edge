@@ -39,25 +39,70 @@ async function handleRequest({ request }: FetchEvent) {
   const url = new URL(request.url);
 
   if (url.pathname.startsWith('/assets')) {
-    const res = await fetch(`https://my-vite-webapp.s3.us-west-2.amazonaws.com${url.pathname}`, {
-      method: 'GET',
-      backend: 'web_static_s3',
-    });
-
-    return new Response(await res.text(), {
-      status: res.status,
-      headers: new Headers({ 'Content-Type': getContentType(url), 'Cache-Control': 'public, max-age=31536000' }),
-    });
+    return await fetchAssets(url);
   }
+
+  const pageProps = await fetchProps();
+
+  console.log('oageprops', pageProps);
 
   const ssrHtml = ReactDOMServer.renderToString(
     <StaticRouter location={url}>
-      <App />
+      <App pageProps={pageProps} />
     </StaticRouter>
   );
 
-  return new Response(indexHtml.replace(/<div id="app"><\/div>/, `<div id="app">${ssrHtml}</div>`), {
-    status: 200,
-    headers: new Headers({ 'Content-Type': 'text/html; charset=utf-8' }),
+  // need to do this for per path fetch endpoints eventually
+  // const activeRoute = routes.find((route) =>
+  //   matchPath(route.path, req.url)
+  // ) || {}
+  //
+  // const promise = activeRoute.fetchInitialData
+  //   ? activeRoute.fetchInitialData(req.path)
+  //   : Promise.resolve()
+  //
+  // promise.then((data) => {
+  //   const markup = ReactDOM.renderToString(
+  //     <App serverData={data} />
+  //   )
+
+  // figure out how to persist comments with htmlwebpackplugin so dont need to replace entire element
+  return new Response(
+    indexHtml
+      .replace(/<div id="app"><\/div>/, `<div id="app">${ssrHtml}</div>`)
+      .replace(
+        '<script id="__SSR_PROPS__" type="application/json"></script>',
+        `<script id="__SSR_PROPS__" type="application/json">${pageProps}</script>`
+      ),
+    {
+      status: 200,
+      headers: new Headers({ 'Content-Type': 'text/html; charset=utf-8' }),
+    }
+  );
+}
+
+async function fetchAssets(url: URL) {
+  const res = await fetch(`https://my-vite-webapp.s3.us-west-2.amazonaws.com${url.pathname}`, {
+    method: 'GET',
+    backend: 'web_static_s3',
   });
+
+  return new Response(await res.text(), {
+    status: res.status,
+    headers: new Headers({ 'Content-Type': getContentType(url), 'Cache-Control': 'public, max-age=31536000' }),
+  });
+}
+
+async function fetchProps() {
+  try {
+    const res = await fetch(`https://abnormally-sterling-tiger.edgecompute.app/api/usertest`, {
+      method: 'GET',
+      backend: 'web_edge_api',
+    });
+
+    return await res.text();
+  } catch (e) {
+    console.log('errored fetching');
+    return {};
+  }
 }

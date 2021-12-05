@@ -1,9 +1,0 @@
-# This file describes a Fastly Compute@Edge package. To learn more visit:
-# https://developer.fastly.com/reference/fastly-toml/
-
-authors = [""]
-description = "react + typescript + ssr + compute@edge"
-language = "javascript"
-manifest_version = 2
-name = "api"
-service_id = "4281LE8rosavPSbDJpOTjp"
