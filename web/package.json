@@ -1,17 +1,5 @@
 {
-  "name": "compute-starter-kit-javascript-default",
-  "version": "0.2.0",
-  "homepage": "https://developer.fastly.com/solutions/starters/compute-starter-kit-javascript-default",
-  "bugs": {
-    "url": "https://github.com/fastly/compute-starter-kit-js-proto/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/fastly/compute-starter-kit-js-proto.git"
-  },
   "license": "MIT",
-  "author": "oss@fastly.com",
-  "main": "src/index.js",
   "scripts": {
     "webpack": "webpack --config webpack.client.config.js && webpack --config webpack.server.config.js",
     "build": "js-compute-runtime --skip-pkg bin/index.js bin/main.wasm",
