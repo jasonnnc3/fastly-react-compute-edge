@@ -4,8 +4,10 @@ import 'regenerator-runtime/runtime.js';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import indexHtml from 'dist/assets/index.html';
+import { matchPath } from 'react-router-dom';
 import { StaticRouter } from 'react-router-dom/server';
 import { App } from 'src/app';
+import { FastlyReactRoute, routes } from 'src/routes';
 
 fastly.enableDebugLogging(true);
 
@@ -43,6 +45,16 @@ async function handleRequest({ request }: FetchEvent) {
   }
 
   const pageProps = await fetchProps();
+
+  const activeRoute =
+    routes.find((route) => {
+      return matchPath(route.path, url.pathname);
+    }) || ({} as FastlyReactRoute);
+
+  console.log('\n\n\n\nthis is active route\n\n\n\n', JSON.stringify(activeRoute));
+  if (activeRoute.fetchProps) {
+    activeRoute.fetchProps();
+  }
 
   const ssrHtml = ReactDOMServer.renderToString(
     <StaticRouter location={url}>

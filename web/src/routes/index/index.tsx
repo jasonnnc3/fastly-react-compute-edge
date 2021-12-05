@@ -11,6 +11,10 @@ interface IndexProps {
   posts: Post[];
 }
 
+Index.fetchProps = () => {
+  console.log('hello im fetching posts');
+};
+
 export function Index({ posts }: IndexProps) {
   console.log('index posts', posts);
 

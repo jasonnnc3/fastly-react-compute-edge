@@ -11,6 +11,10 @@ interface AboutProps {
   profile: Profile;
 }
 
+About.fetchProps = () => {
+  console.log('hello im fetching profile');
+};
+
 export function About({ profile }: AboutProps) {
   console.log('about prof', profile);
 
