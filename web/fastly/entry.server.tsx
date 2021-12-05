@@ -3,7 +3,7 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import indexHtml from 'dist/assets/index.html';
-import { matchPath } from 'react-router';
+import { matchPath, PathMatch } from 'react-router';
 import { StaticRouter } from 'react-router-dom/server';
 import { App } from 'src/app';
 import { fetchAssets } from 'fastly/utils';
@@ -51,7 +51,15 @@ async function handleRequest({ request }: FetchEvent) {
 }
 
 async function getPageProps(pathname: string) {
-  const activeRoute = routes.find((route) => matchPath(route.path, pathname));
-  //@ts-ignore
-  return await (activeRoute?.element?.fetchSSRProps?.(pathname) || Promise.resolve('{}'));
+  let pathMatch: PathMatch | null;
+
+  for (const route of routes) {
+    pathMatch = matchPath(route.path, pathname);
+
+    if (pathMatch) {
+      const { pathname, params } = pathMatch;
+      //@ts-ignore
+      return await (route?.element?.fetchSSRProps?.({ pathname, params }) || Promise.resolve('{}'));
+    }
+  }
 }

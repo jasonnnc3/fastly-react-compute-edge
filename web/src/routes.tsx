@@ -3,12 +3,6 @@ import { PostsPage } from 'src/routes/posts/posts.page';
 import { ProfilePage } from 'src/routes/profile/profile.page';
 import { IndexPage } from 'src/routes/index/index.page';
 
-export interface FastlyReactRoute {
-  path: string;
-  element: JSX.Element;
-  fetchSSRProps?: () => Promise<unknown>;
-}
-
 export const routes = [
   {
     path: '/',
