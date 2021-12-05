@@ -1,7 +1,7 @@
 // @ts-check
-const fs = require('fs');
-const path = require('path');
-const express = require('express');
+import fs from 'fs';
+import path from 'path';
+import express from 'express';
 
 async function createServer(root = process.cwd()) {
   const app = express();
@@ -20,34 +20,27 @@ async function createServer(root = process.cwd()) {
   app.use(vite.middlewares);
   app.use('*', async (req, res) => {
     try {
-      const url = req.originalUrl;
+      const pathname = req.originalUrl;
       const template = await vite.transformIndexHtml(
-        url,
+        pathname,
         fs.readFileSync(path.resolve(__dirname, '..', 'fastly/template.html'), 'utf-8')
       );
-      const render = (await vite.ssrLoadModule('/vite/entry.server.jsx')).render;
-      const context = {};
-      const pageProps = {};
-      const appHtml = render(url, context, pageProps);
+      const render = (await vite.ssrLoadModule('/fastly/ssr.tsx')).render;
+      const context: { url?: string } = {};
+      const html = await render(template, new URL('http://localhost:3000' + pathname));
 
       if (context.url) {
         return res.redirect(301, context.url);
       }
 
-      res
-        .status(200)
-        .set({ 'Content-Type': 'text/html' })
-        .end(
-          template
-            .replace(/<div id="app"><\/div>/, `<div id="app">${appHtml}</div>`)
-            .replace(
-              '<script id="__SSR_PROPS__" type="application/json"></script>',
-              `<script id="__SSR_PROPS__" type="application/json">${JSON.stringify(pageProps)}</script>`
-            )
-        );
+      console.log(html);
+
+      res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
     } catch (e) {
       vite.ssrFixStacktrace(e);
+      // @ts-ignore
       console.log(e.stack);
+      // @ts-ignore
       res.status(500).end(e.stack);
     }
   });
@@ -57,6 +50,6 @@ async function createServer(root = process.cwd()) {
 
 createServer().then(({ app }) =>
   app.listen(3000, () => {
-    console.log('http://localhost:3000');
+    console.log('started at http://localhost:3000');
   })
 );

@@ -50,7 +50,7 @@ async function handleRequest({ request }: FetchEvent) {
   );
 }
 
-async function getPageProps(pathname: string) {
+export async function getPageProps(pathname: string) {
   let pathMatch: PathMatch | null;
 
   for (const route of routes) {
