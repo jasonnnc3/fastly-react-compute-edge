@@ -12,3 +12,5 @@ service_id = "1oK339TNygw8QZMJDaAtal"
   [local_server.backends]
     [local_server.backends.web_static_s3]
       url = "https://my-vite-webapp.s3.us-west-2.amazonaws.com"
+    [local_server.backends.web_edge_api]
+      url = "https://abnormally-sterling-tiger.edgecompute.app"
