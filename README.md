@@ -4,6 +4,8 @@ react framework tailor-made for fastlys compute@edge serverless platform. the go
 to make general purpose frontend development productive and simple (without sacrificing performance) for the most common use
 cases (SaaS web applications, dynamic content for marketing pages, blog + CMS integrations, support center headless CMS, etc).
 
+production link [here](https://slowly-aware-hog.edgecompute.app/) (503's sometimes, not sure why but just refresh)
+
 ## Running the development environment
 
 The development environment uses [Vite](https://vitejs.dev/) in middleware mode to mimic the SSR compute@edge environment without
