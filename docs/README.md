@@ -453,7 +453,7 @@ Rather than bundle the code, execute the fastly-js-runtime, compile to wasm, and
 environment uses [Vite](https://vitejs.dev/) in middleware mode. This allows the use of modern developer tooling like
 hot module replacement, instant react component updates on save, and instant development server startup.
 
-i developed a majority of this using the initial approach (takes ~15 seconds each time a change is made). contrast that to the setup with vite dev server where every change made is hot reloaded into the browser in ~50ms. much better experience. worth the sarcrifice of parity between development / production environments which will be mitigated by automated testing anyways.
+i developed a majority of this using the initial approach (takes ~15 seconds each time a change is made). contrast that to the setup with vite dev server where every change made is hot reloaded into the browser in ~50ms. much better experience. worth the tradeoff of parity between development / production environments which will be mitigated by automated testing anyways.
 
 There are a few changes that were needed to get this to work:
 
