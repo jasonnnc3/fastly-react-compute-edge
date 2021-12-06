@@ -2,7 +2,7 @@
 
 import React from 'react';
 import indexHtml from 'dist/assets/index.html';
-import { fetchAssets } from 'internals/utils';
+import { fetchAssets, wait } from 'internals/utils';
 import { renderHtml } from 'internals/ssr-handler';
 
 fastly.enableDebugLogging(true);
@@ -20,6 +20,14 @@ async function handleRequest({ request }: FetchEvent) {
 
   if (url.pathname.startsWith('/assets')) {
     return await fetchAssets(url);
+  }
+
+  if (url.pathname.startsWith('/client-side-fetch-example')) {
+    await wait(5);
+    return new Response(JSON.stringify({ some: 'data that took forever to load', more: 'keys', and: 'values' }), {
+      status: 200,
+      headers: new Headers({ 'Content-Type': 'application/json' }),
+    });
   }
 
   return new Response(await renderHtml(indexHtml, url), {

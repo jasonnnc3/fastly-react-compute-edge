@@ -55,6 +55,9 @@ export function App({ pageProps }: AppProps) {
             <li>
               <Link to="/profile">Profile</Link>
             </li>
+            <li>
+              <Link to="/client-side-fetch">Client Side Fetching Example</Link>
+            </li>
           </ul>
         </div>
       </nav>

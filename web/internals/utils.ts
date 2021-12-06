@@ -32,3 +32,12 @@ function getContentType(url: URL) {
 
   return contentType;
 }
+
+export function wait(seconds: number) {
+  const now = new Date();
+  const waitUntil = now.setSeconds(now.getSeconds() + seconds);
+
+  while (Date.now() < waitUntil) {}
+
+  return;
+}

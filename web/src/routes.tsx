@@ -1,3 +1,4 @@
+import { ClientSideFetchPage } from 'src/routes/client-side-fetch/client-side-fetch.page';
 import { PostPage } from 'src/routes/posts/[id].page';
 import { PostsPage } from 'src/routes/posts/posts.page';
 import { ProfilePage } from 'src/routes/profile/profile.page';
@@ -19,5 +20,9 @@ export const routes = [
   {
     path: '/posts/:id',
     element: PostPage,
+  },
+  {
+    path: '/client-side-fetch',
+    element: ClientSideFetchPage,
   },
 ] as const;

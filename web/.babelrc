@@ -10,5 +10,16 @@
     ],
     "@babel/react",
     "@babel/preset-typescript"
+  ],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "root": ["."],
+        "alias": {
+          "internals": "./internals"
+        }
+      }
+    ]
   ]
 }
