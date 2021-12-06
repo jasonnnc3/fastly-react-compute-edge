@@ -1,5 +1,18 @@
 # table of contents
 
+- [how it works](#how-it-works)
+  - [fetchSSRProps](#-fetchssrprops-)
+  - [fetchFastlyBackend](#-fetchfastlybackend-)
+  - [1. initial page load (html render phase)](#1-initial-page-load--html-render-phase-)
+  - [2. fetching assets](#2-fetching-assets)
+  - [3. [optional] client side data fetching after React component mount](#3--optional--client-side-data-fetching-after-react-component-mount)
+- [deployment](#deployment)
+  - [1. make -j deploy](#1--make--j-deploy-)
+  - [2. check-types](#2--check-types-)
+  - [3. build](#3--build-)
+  - [4. npm run deploy](#4--npm-run-deploy-)
+- [current differences between development and production](#current-differences-between-development-and-production)
+
 **note:** documentation is a work in progress. its currently designed to be read from top to bottom, otherwise context will be missing for the later sections.
 
 ## how it works
