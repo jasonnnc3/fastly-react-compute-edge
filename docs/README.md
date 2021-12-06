@@ -368,7 +368,7 @@ export async function fetchAssets(url: URL) {
 
   /**
    * return asset and set long term cache header. the asset is content hashed so any changes
-   * n future deployments will handle cache busting automatically
+   * in future deployments will handle cache busting automatically
     */
   return new Response(await res.text(), {
     status: res.status,
