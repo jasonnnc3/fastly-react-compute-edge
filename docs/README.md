@@ -401,7 +401,7 @@ function getContentType(url: URL) {
 ![initial page load diagram](./assets/csdf.jpg)
 
 Data fetching client side is a very common data fetching pattern. wont walk through it in
-detail but you can refer to the [code](https://github.com/jasonnnnnnnnnnnnn/fastly-react-compute-edge/blob/main/web/src/routes/client-side-fetch/client-side-fetch.page.tsx) to see an example.
+detail but you can refer to the [code](https://github.com/jasonnnnnnnnnnnnn/fastly-react-compute-edge/blob/main/web/src/routes/client-side-fetch/client-side-fetch.page.tsx) or view the page in production [here](https://slowly-aware-hog.edgecompute.app/client-side-fetch) to see an example.
 
 ## deployment
 
