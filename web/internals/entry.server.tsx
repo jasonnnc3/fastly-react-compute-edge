@@ -23,7 +23,7 @@ async function handleRequest({ request }: FetchEvent) {
   }
 
   if (url.pathname.startsWith('/client-side-fetch-example')) {
-    await wait(5);
+    await wait(2);
     return new Response(JSON.stringify({ some: 'data that took forever to load', more: 'keys', and: 'values' }), {
       status: 200,
       headers: new Headers({ 'Content-Type': 'application/json' }),

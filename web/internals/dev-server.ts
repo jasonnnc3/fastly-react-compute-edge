@@ -25,7 +25,7 @@ async function createServer(root = path.resolve(__dirname, '..')) {
 
       // TODO: replace this if/else /client-side-fetch-example, was a quick example to show how client side fetching works without client side routing
       if (pathname === '/client-side-fetch-example') {
-        await wait(5);
+        await wait(2);
         res
           .status(200)
           .set({ 'Content-Type': 'application/json' })
