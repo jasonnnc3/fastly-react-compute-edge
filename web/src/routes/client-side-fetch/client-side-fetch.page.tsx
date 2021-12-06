@@ -1,10 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import styles from 'src/routes/client-side-fetch/client-side-data-fetch.module.scss';
 
-const fetcher = (pathname: string) => fetch(pathname).then((res) => res.json());
+function wait(seconds: number) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, 2000);
+  });
+}
+
+async function fetcher(pathname: string) {
+  await wait(2);
+  return { pathname, some: 'data that took forever to load', more: 'keys', and: 'values' };
+}
 
 export function ClientSideFetchPage() {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<ReturnType<typeof fetcher> | null>(null);
 
   useEffect(() => {
     const fillBar = document.getElementsByClassName(styles.progressFill)[0];
@@ -17,6 +26,7 @@ export function ClientSideFetchPage() {
   useEffect(() => {
     void (async function fetchClientSide() {
       const res = await fetcher('/client-side-fetch-example');
+      // @ts-expect-error
       setData(res);
     })();
   }, []);
