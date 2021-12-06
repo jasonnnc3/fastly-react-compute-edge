@@ -15,7 +15,7 @@ export async function renderHtml(template: string, url: URL) {
     </StaticRouter>
   );
 
-  // figure out how to persist comments with htmlwebpackplugin so dont need to replace entire element
+  // TODO: figure out how to persist comments with htmlwebpackplugin so dont need to replace entire element
   return template
     .replace(/<div id="app"><\/div>/, `<div id="app">${html}</div>`)
     .replace(
