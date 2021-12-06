@@ -1,6 +1,6 @@
 /// <reference types="@fastly/js-compute" />
 
-import { backendConfig } from 'fastly/index';
+import { backendConfig } from 'internals/index';
 
 export async function fetchAssets(url: URL) {
   const res = await fetch(backendConfig['web_static_s3'] + url.pathname, {

@@ -1,4 +1,4 @@
-import { fetchFastlyBackend } from 'fastly';
+import { fetchFastlyBackend } from 'internals';
 import React from 'react';
 import { Profile } from 'src/app';
 import { Link } from 'src/components/link/link';
@@ -22,7 +22,7 @@ export function ProfilePage({ profile }: ProfileProps) {
       <h1>profile</h1>
       <ul>
         {Object.entries(profile).map(([key, value]) => (
-          <li>
+          <li key={key}>
             <strong>{key}:</strong> {value}
           </li>
         ))}
