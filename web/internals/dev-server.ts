@@ -46,9 +46,9 @@ async function createServer(root = path.resolve(__dirname, '..')) {
       }
     } catch (e) {
       vite.ssrFixStacktrace(e);
-      // @ts-ignore
+      // @ts-expect-error
       console.log(e.stack);
-      // @ts-ignore
+      // @ts-expect-error
       res.status(500).end(e.stack);
     }
   });

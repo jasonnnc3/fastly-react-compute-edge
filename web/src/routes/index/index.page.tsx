@@ -8,7 +8,7 @@ export function IndexPage() {
       <p>welcome to the example, click a link to view data fetching in action</p>
       <div>
         <a
-          href="https://github.com/jasonnnnnnnnnnnnn/fastly-react-compute-edge/tree/main/web"
+          href="https://github.com/jasonnnnnnnnnnnnn/fastly-react-compute-edge"
           target="_blank"
           rel="noreferrer nofollow"
           className={styles.someClass}

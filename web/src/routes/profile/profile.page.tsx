@@ -30,7 +30,7 @@ export function ProfilePage({ profile }: ProfileProps) {
       <Link to="/">to home</Link>
       <div>
         <a
-          href="https://github.com/jasonnnnnnnnnnnnn/fastly-react-compute-edge/tree/main/web"
+          href="https://github.com/jasonnnnnnnnnnnnn/fastly-react-compute-edge"
           target="_blank"
           rel="noreferrer nofollow"
           className={styles.someClass}

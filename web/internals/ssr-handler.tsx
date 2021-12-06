@@ -10,7 +10,6 @@ export async function renderHtml(template: string, url: URL) {
 
   const html = ReactDOMServer.renderToString(
     <StaticRouter location={url}>
-      {/*// @ts-ignore*/}
       <App pageProps={pageProps} />
     </StaticRouter>
   );

@@ -22,7 +22,7 @@ export function PostPage({ post: { title, content } }: PostProps) {
       <p>{content}</p>
       <div>
         <a
-          href="https://github.com/jasonnnnnnnnnnnnn/fastly-react-compute-edge/tree/main/web"
+          href="https://github.com/jasonnnnnnnnnnnnn/fastly-react-compute-edge"
           target="_blank"
           rel="noreferrer nofollow"
           className={styles.someClass}
