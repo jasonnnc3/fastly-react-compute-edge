@@ -14,15 +14,12 @@ async function handleRequest({ request }: FetchEvent) {
     });
   }
 
-  // url is https://slowly-aware-hog.edgecompute.app/profile
   const url = new URL(request.url);
 
-  // not an asset, skipping if statement
   if (url.pathname.startsWith('/assets')) {
     return await fetchAssets(url);
   }
 
-  // the full url is passed to `renderHtml`, along with the html template generated during the client side build process before deployment.
   return new Response(await renderHtml(indexHtml, url), {
     status: 200,
     headers: new Headers({ 'Content-Type': 'text/html; charset=utf-8' }),
