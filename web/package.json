@@ -4,6 +4,7 @@
     "webpack": "webpack --config webpack.client.config.js && webpack --config webpack.server.config.js",
     "build": "js-compute-runtime bin/index.js bin/main.wasm",
     "deploy": "npm run build && fastly compute deploy",
+    "dev": "babel-node --presets @babel/preset-typescript,@babel/preset-env --extensions '.ts' internals/dev-server.ts",
     "type-check": "tsc"
   },
   "dependencies": {
@@ -26,11 +27,14 @@
     "node": "^16"
   },
   "devDependencies": {
+    "@types/express": "^4.17.13",
     "@types/react": "^17.0.37",
     "@types/react-dom": "^17.0.11",
+    "@vitejs/plugin-react": "^1.1.0",
     "autoprefixer": "^10.4.0",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.5.1",
+    "express": "^4.17.1",
     "html-loader": "^3.0.1",
     "html-webpack-plugin": "^5.5.0",
     "husky": "^7.0.4",
@@ -40,7 +44,8 @@
     "prettier": "^2.5.0",
     "sass": "^1.44.0",
     "sass-loader": "^12.3.0",
-    "typescript": "^4.5.2"
+    "typescript": "^4.5.2",
+    "vite": "^2.6.14"
   },
   "husky": {
     "hooks": {

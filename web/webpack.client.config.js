@@ -1,5 +1,4 @@
 const path = require('path');
-const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -7,7 +6,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = {
   mode: 'production',
   entry: {
-    client: './fastly/entry.client.tsx',
+    client: './internals/entry.client.tsx',
   },
   optimization: {
     minimize: true,
@@ -47,7 +46,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, 'fastly', 'template.html'),
+      template: path.resolve(__dirname, 'internals', 'template.prod.html'),
       filename: 'index.html',
       inject: 'body',
     }),

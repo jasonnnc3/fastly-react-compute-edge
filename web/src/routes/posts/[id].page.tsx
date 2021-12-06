@@ -1,4 +1,4 @@
-import { fetchFastlyBackend, FetchSSRPropsParams } from 'fastly';
+import { fetchFastlyBackend, FetchSSRPropsParams } from 'internals';
 import React from 'react';
 import { Post } from 'src/app';
 import styles from 'src/routes/profile/profile.module.scss';
