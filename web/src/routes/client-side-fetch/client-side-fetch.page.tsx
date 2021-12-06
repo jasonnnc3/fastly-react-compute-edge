@@ -3,7 +3,7 @@ import styles from 'src/routes/client-side-fetch/client-side-data-fetch.module.s
 
 function wait(seconds: number) {
   return new Promise((resolve) => {
-    setTimeout(resolve, 2000);
+    setTimeout(resolve, seconds * 1000);
   });
 }
 
