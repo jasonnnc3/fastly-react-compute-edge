@@ -303,7 +303,7 @@ export function App({ pageProps }: AppProps) {
       <Routes>
         <Route path="*" element={<NotFoundPage />} />
         {routes.map(({ path, element: Element }) => (
-          // path is /profile which mapped to the ProfilePage component, which React Router then renders with the props we hydrated client side!
+          // path is /profile which mapped to the ProfilePage component, which React Router then renders with the props we hydrated client side
           <Route key={path} path={path} element={<Element {...pageProps} />} />
         ))}
       </Routes>
